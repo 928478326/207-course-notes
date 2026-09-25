@@ -38,66 +38,75 @@ import java.util.regex.Pattern;
  */
 public class Extractor {
 
-  /**
-   * Matches a UofT-style course code: three letters, three digits, then a
-   * campus/session suffix such as {@code H1F} — a letter, a digit, and a letter.
-   * The parentheses make the three digits a <em>capturing group</em>, which
-   * {@link #findCourseNumbers(String)} can pull out with {@code group(1)}.
-   */
-  private static final Pattern COURSE_CODE = Pattern.compile("[A-Z]{3}(\\d{3})[A-Z]\\d[A-Z]");
+    /**
+     * Matches a UofT-style course code: three letters, three digits, then a
+     * campus/session suffix such as {@code H1F} — a letter, a digit, and a letter.
+     * The parentheses make the three digits a <em>capturing group</em>, which
+     * {@link #findCourseNumbers(String)} can pull out with {@code group(1)}.
+     */
+    private static final Pattern COURSE_CODE = Pattern.compile("[A-Z]{3}(\\d{3})[A-Z]\\d[A-Z]");
 
-  /**
-   * Matches a simple email address: one or more "local" characters (letters,
-   * digits, or any of {@code . _ % + -}), an {@code @}, a domain of
-   * letters/digits/{@code . -}, then a {@code .} and a top-level domain of at
-   * least two letters. This is the same shape as {@code Validators.isEmail}.
-   */
-  private static final Pattern EMAIL =
-      Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}");
+    /**
+     * Matches a simple email address: one or more "local" characters (letters,
+     * digits, or any of {@code . _ % + -}), an {@code @}, a domain of
+     * letters/digits/{@code . -}, then a {@code .} and a top-level domain of at
+     * least two letters. This is the same shape as {@code Validators.isEmail}.
+     */
+    private static final Pattern EMAIL =
+            Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}");
 
-  /** The text used to replace each email address found by {@link #maskEmails(String)}. */
-  private static final String MASK = "***";
+    /** The text used to replace each email address found by {@link #maskEmails(String)}. */
+    private static final String MASK = "***";
 
-  /**
-   * Finds every course code appearing anywhere in {@code text}, in the order they
-   * appear. For example, the text {@code "Take CSC207H1F before CSC236H1S."}
-   * yields {@code ["CSC207H1F", "CSC236H1S"]}.
-   *
-   * @param text the text to search; may contain any number of course codes
-   * @return the course codes found, or an empty list if there are none (never null)
-   */
-  public static List<String> findCourseCodes(String text) {
-    List<String> results = new ArrayList<>();
-    // TODO: get a Matcher for text from COURSE_CODE, then loop with find(),
-    //       adding matcher.group() to results each time.
-    return results;
-  }
+    /**
+     * Finds every course code appearing anywhere in {@code text}, in the order they
+     * appear. For example, the text {@code "Take CSC207H1F before CSC236H1S."}
+     * yields {@code ["CSC207H1F", "CSC236H1S"]}.
+     *
+     * @param text the text to search; may contain any number of course codes
+     * @return the course codes found, or an empty list if there are none (never null)
+     */
+    public static List<String> findCourseCodes(String text) {
+        List<String> results = new ArrayList<>();
+        // TODO: get a Matcher for text from COURSE_CODE, then loop with find(),
+        //       adding matcher.group() to results each time.
+        Matcher mat = COURSE_CODE.matcher(text);
+        while (mat.find()){
+            results.add(mat.group());
+        }
+        return results;
+    }
 
-  /**
-   * Finds just the three-digit number of every course code in {@code text}, in the
-   * order they appear. For example, {@code "Take CSC207H1F before CSC236H1S."}
-   * yields {@code ["207", "236"]}.
-   *
-   * @param text the text to search
-   * @return the course numbers found, or an empty list if there are none (never null)
-   */
-  public static List<String> findCourseNumbers(String text) {
-    List<String> results = new ArrayList<>();
-    // TODO: same loop as above, but add matcher.group(1) — the text captured by
-    //       the parenthesised (\d{3}) group — instead of the whole match.
-    return results;
-  }
+    /**
+     * Finds just the three-digit number of every course code in {@code text}, in the
+     * order they appear. For example, {@code "Take CSC207H1F before CSC236H1S."}
+     * yields {@code ["207", "236"]}.
+     *
+     * @param text the text to search
+     * @return the course numbers found, or an empty list if there are none (never null)
+     */
+    public static List<String> findCourseNumbers(String text) {
+        List<String> results = new ArrayList<>();
+        // TODO: same loop as above, but add matcher.group(1) — the text captured by
+        //       the parenthesised (\d{3}) group — instead of the whole match.
+        Matcher mat = COURSE_CODE.matcher(text);
+        while (mat.find()){
+            results.add(mat.group(1));
+        }
+        return results;
+    }
 
-  /**
-   * Returns {@code text} with every email address replaced by {@code ***}. Text
-   * that is not an email address is left exactly as it was, and text containing no
-   * email addresses is returned unchanged.
-   *
-   * @param text the text to mask
-   * @return the text with each email address replaced by {@code ***}
-   */
-  public static String maskEmails(String text) {
-    // TODO: get a Matcher for text from EMAIL and return matcher.replaceAll(MASK).
-    return text;
-  }
+    /**
+     * Returns {@code text} with every email address replaced by {@code ***}. Text
+     * that is not an email address is left exactly as it was, and text containing no
+     * email addresses is returned unchanged.
+     *
+     * @param text the text to mask
+     * @return the text with each email address replaced by {@code ***}
+     */
+    public static String maskEmails(String text) {
+        // TODO: get a Matcher for text from EMAIL and return matcher.replaceAll(MASK).
+        Matcher mat = EMAIL.matcher(text);
+        return mat.replaceAll(MASK);
+    }
 }

@@ -10,49 +10,53 @@
  */
 public class Box<T> {
 
-  private T item;
+    private T item;
 
-  /**
-   * Stores {@code item} in this box.
-   *
-   * @param item the value to store
-   */
-  public void set(T item) {
-    // TODO: store item in this box's field (mind the shadowing — use `this`).
-  }
+    /**
+     * Stores {@code item} in this box.
+     *
+     * @param item the value to store
+     */
+    public void set(T item) {
+        // TODO: store item in this box's field (mind the shadowing — use `this`).
+        this.item = item;
+    }
 
-  /**
-   * Returns the value currently stored in this box (or null if none).
-   *
-   * @return the stored value
-   */
-  public T get() {
-    // TODO
-    return null;
-  }
+    /**
+     * Returns the value currently stored in this box (or null if none).
+     *
+     * @return the stored value
+     */
+    public T get() {
+        // TODO
+        return item;
+    }
 
-  /**
-   * Returns whether this box is empty (holds no item).
-   *
-   * @return true iff no item has been stored
-   */
-  public boolean isEmpty() {
-    // TODO
-    return false;
-  }
+    /**
+     * Returns whether this box is empty (holds no item).
+     *
+     * @return true iff no item has been stored
+     */
+    public boolean isEmpty() {
+        // TODO
+        return item == null;
+    }
 
-  /**
-   * Returns the larger of {@code a} and {@code b}. The bound
-   * {@code <T extends Comparable<T>>} guarantees the values can be compared with
-   * {@code compareTo}.
-   *
-   * @param a the first value
-   * @param b the second value
-   * @param <T> a type that is comparable with itself
-   * @return whichever of a and b is greater (a if they are equal)
-   */
-  public static <T extends Comparable<T>> T max(T a, T b) {
-    // TODO: use a.compareTo(b) to decide which to return.
-    return a;
-  }
+    /**
+     * Returns the larger of {@code a} and {@code b}. The bound
+     * {@code <T extends Comparable<T>>} guarantees the values can be compared with
+     * {@code compareTo}.
+     *
+     * @param a the first value
+     * @param b the second value
+     * @param <T> a type that is comparable with itself
+     * @return whichever of a and b is greater (a if they are equal)
+     */
+    public static <T extends Comparable<T>> T max(T a, T b) {
+        // TODO: use a.compareTo(b) to decide which to return.
+        if (a.compareTo(b) >= 0){
+            return a;
+        }
+        return b;
+    }
 }
