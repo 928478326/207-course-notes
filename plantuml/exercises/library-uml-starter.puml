@@ -19,13 +19,31 @@ hide empty members
 '   Interface <|.. Class    ' realization:    Class implements Interface
 ' (Putting the parent/interface on the LEFT of the arrow keeps it on top, which
 '  is the convention used in these notes.)
-
+interface Borrowable {}
+abstract class Person {}
 abstract class Item {
   - title : String
   - catalogueNumber : String
   + getTitle() : String
   + getCatalogueNumber() : String
 }
+
+class Book {}
+class DVD {}
+class refItem {}
+Item <|-- Book
+Item <|-- DVD
+Item <|-- refItem
+Borrowable <|.. Book
+Borrowable <|.. DVD
+class Member {}
+class Librarian {}
+Person <|-- Member
+Person <|-- Librarian
+class Hold {}
+Hold -- Librarian
+Hold -- Member
+Hold -- Borrowable
 
 ' TODO: add boxes for Book and DVD. What differs between them — a whole class,
 '       or just the value of a loan-period field?
