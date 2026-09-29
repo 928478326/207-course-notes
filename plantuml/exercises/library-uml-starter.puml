@@ -28,19 +28,25 @@ abstract class Item {
   + getCatalogueNumber() : String
 }
 
-class Book {}
-class DVD {}
-class refItem {}
+class Book {
+}
+class DVD {
+}
+class refItem {
+}
 Item <|-- Book
 Item <|-- DVD
 Item <|-- refItem
 Borrowable <|.. Book
 Borrowable <|.. DVD
-class Member {}
-class Librarian {}
+class Member {
+}
+class Librarian {
+}
 Person <|-- Member
 Person <|-- Librarian
-class Hold {}
+class Hold {
+}
 Hold -- Librarian
 Hold -- Member
 Hold -- Borrowable

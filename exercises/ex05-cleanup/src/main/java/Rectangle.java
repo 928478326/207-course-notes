@@ -10,6 +10,7 @@ public class Rectangle {
    * @param w the width of the rectangle
    * @param h the height of the rectangle
    */
+
   public Rectangle(double w, double h) {
     this.width = w;
     this.height = h;
@@ -19,6 +20,7 @@ public class Rectangle {
    *
    * @return the area of this rectangle
    */
+
   public double area() {
     return width * height;
   }
@@ -38,6 +40,7 @@ public class Rectangle {
    * @param other the rectangle to compare with
    * @return true if this rectangle has a larger area than the other rectangle
    */
+
   public boolean isLargerThan(Rectangle other) {
     return area() > other.area();
   }
