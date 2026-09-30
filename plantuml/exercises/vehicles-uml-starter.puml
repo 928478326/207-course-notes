@@ -37,9 +37,9 @@ class ElectricCar {
   + charge() : void
 }
 
-Vehicle <|-- Car
-Car <|-- ElectricCar
-Chargeable <|.. ElectricCar
+Car --|> Vehicle
+ElectricCar --|> Car
+ElectricCar ..|> Chargeable
 ' TODO: add "abstract class Vehicle", "class Car", and "class ElectricCar"
 '       (with their fields and methods), then add the arrows between all four
 '       types.
